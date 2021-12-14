@@ -16,3 +16,12 @@ C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\San
 C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Form1.resources
 C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Properties.Resources.resources
 C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.csproj.GenerateResource.Cache
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\bin\Debug\Sandbox Winforms.exe.config
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\obj\Debug\Sandbox Winforms.exe
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\obj\Debug\Sandbox Winforms.pdb
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\bin\Debug\Sandbox Winforms.exe
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\bin\Debug\Sandbox Winforms.pdb
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\obj\Debug\Sandbox Winforms.csprojResolveAssemblyReference.cache
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Form1.resources
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Properties.Resources.resources
+C:\Visual Studio 2015\Projects 2\_IA-Expression solver\Sandbox Winforms\obj\Debug\Sandbox Winforms.csproj.GenerateResource.Cache

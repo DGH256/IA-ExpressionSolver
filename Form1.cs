@@ -174,45 +174,117 @@ namespace Sandbox_Winforms
         string generate_ruleAdditionOperations()
         {
             string result = "";
-            string lastWord = words_reversed[words_reversed.Count - 1];
-            string l1, l2, l3;
-            string l1_prev, l2_prev, l3_prev;
 
-            l1 = l2 = l3 = "0";
+            List<string> l = new List<string>();
+            List<string> l_prev = new List<string>();
 
-            for(int i=0;i<wordMaxLength;i++)
+            string first_nonEmpty, last_nonEmpty;
+            int contor_nonEmpty;
+
+            for (int j = 0; j < words_reversed.Count; j++)
             {
-                l1_prev = l1;l2_prev = l2;l3_prev = l3;
-
-                l1 = l2 = l3 = "0";
-
-                if(i<lastWord.Length)
-                {
-                    l1 = "?" + Char.ToLower(lastWord[i]);
-                }
-
-                if(i<words_reversed[0].Length)
-                {
-                    l2 = "?" + Char.ToLower(words_reversed[0][i]);
-                }
-
-                if (i < words_reversed[1].Length)
-                {
-                    l3 = "?" + Char.ToLower(words_reversed[1][i]);
-                }
-
-                if( l1 !=l2 && l3=="0" &&(l2_prev=="0" || l3_prev=="0"))
-                {
-                    l3 = "1";
-                }
-
-                if (i==wordMaxLength-1)
-                {
-                    result += string.Format("(combination (letter {0}) (number {1}&:(<  (+ (+ {2} {3}) (/ (+ {4} {5}) 10))  10)))", l1.Substring(1).ToUpper(), l1, l2, l3, l2_prev, l3_prev, l1) + Environment.NewLine;
-                }
-
-                result += string.Format("(combination (letter {0}) (number {1}&:(= (mod (+ (+ {2} {3}) (/ (+ {4} {5}) 10)) 10) {6}))) ",l1.Substring(1).ToUpper(),l1,l2,l3,l2_prev,l3_prev,l1) + Environment.NewLine;
+                l.Add("0"); l_prev.Add("0");
             }
+
+            for (int i = 0; i < wordMaxLength; i++)
+            {
+                for (int j = 0; j < words_reversed.Count; j++)
+                {
+                    l_prev[j] = l[j];
+                }
+
+                first_nonEmpty = last_nonEmpty = "0";
+                contor_nonEmpty = 0;
+                for (int j = 0; j < words_reversed.Count; j++)
+                {
+                    l[j] = "0";
+
+                    if (i < words_reversed[j].Length)
+                    {
+                        l[j] = "?" + Char.ToLower(words_reversed[j][i]);
+
+                        if (first_nonEmpty == "0") { first_nonEmpty = l[j]; }
+                        last_nonEmpty = l[j];
+                        contor_nonEmpty++;
+                    }
+                }
+
+                if(first_nonEmpty!="0" && last_nonEmpty!="0" && first_nonEmpty!=last_nonEmpty && contor_nonEmpty==2)
+                {
+                    for (int j = 0; j < words_reversed.Count; j++)
+                    {
+                        if (l[j] == "0") { l[j] = "1"; break; }
+                    }
+                }
+
+                string expression1 = string.Format("(+ {0} {1})", l[0], l[1]);
+
+                string expression2 = string.Format("(+ {0} {1})", l_prev[0], l_prev[1]);
+
+                if(words.Count>3)
+                {
+                    for(int j=2;j<words.Count-1;j++)
+                    {
+                        expression1 = string.Format("(+ {0} {1})", expression1, l[j]);
+                        expression2 = string.Format("(+ {0} {1})", expression2, l_prev[j]);
+                    }
+                }
+
+                string l1 = l[words.Count - 1];
+
+                if (i == wordMaxLength - 1)
+                {
+                    result += string.Format("(combination (letter {0}) (number {1}&:(<  (+ {2} (/ {3} 10))  10)))", l1.Substring(1).ToUpper(), l1, expression1, expression2) + Environment.NewLine;
+                }
+
+                result += string.Format("(combination (letter {0}) (number {1}&:(= (mod (+ {2} (/ {3} 10)) 10) {4}))) ", l1.Substring(1).ToUpper(), l1, expression1, expression2, l1) + Environment.NewLine;
+
+
+            }
+
+            //string lastWord = words_reversed[words_reversed.Count - 1];
+            //string l1, l2, l3;
+            //string l1_prev, l2_prev, l3_prev;
+            //l1 = l2 = l3 = "0";
+
+            //for (int i=0;i<wordMaxLength;i++)
+            //{
+            //    l1_prev = l1;l2_prev = l2;l3_prev = l3;
+
+            //    l1 = l2 = l3 = "0";
+
+            //    if(i<lastWord.Length)
+            //    {
+            //        l1 = "?" + Char.ToLower(lastWord[i]);
+            //    }
+
+            //    if(i<words_reversed[0].Length)
+            //    {
+            //        l2 = "?" + Char.ToLower(words_reversed[0][i]);
+            //    }
+
+            //    if (i < words_reversed[1].Length)
+            //    {
+            //        l3 = "?" + Char.ToLower(words_reversed[1][i]);
+            //    }
+
+            //    if( l1 !=l2 && l3=="0" &&(l2_prev=="0" || l3_prev=="0"))
+            //    {
+            //        l3 = "1";
+            //    }
+
+
+            //    string expression1 = string.Format("(+ {0} {1})", l2, l3);
+
+            //    string expression2 = string.Format("(+ {0} {1})", l2_prev, l3_prev);
+
+            //    if (i==wordMaxLength-1)
+            //    {
+            //        result += string.Format("(combination (letter {0}) (number {1}&:(<  (+ {2} (/ {3} 10))  10)))", l1.Substring(1).ToUpper(), l1, expression1, expression2) + Environment.NewLine;
+            //    }
+
+            //    result += string.Format("(combination (letter {0}) (number {1}&:(= (mod (+ {2} (/ {3} 10)) 10) {4}))) ",l1.Substring(1).ToUpper(),l1,expression1,expression2,l1) + Environment.NewLine;
+            //}
 
             return result;
         }
@@ -378,46 +450,72 @@ namespace Sandbox_Winforms
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int max_noDigits = 8;
+            int max_Digits = 8;
 
-            try
-            {
-                max_noDigits = Convert.ToInt32(textBox1.Text);
-            }
-            catch(Exception ex) { }
+            int max_Numbers = 2;
+
+            int nr_digits, nr_numbers;
+
+            List<string> generated_numbers = new List<string>();
+
+            try { max_Digits = Convert.ToInt32(textBox1.Text); } catch(Exception ex) { }
+            try { max_Numbers = Convert.ToInt32(textBox2.Text); } catch (Exception ex) { }
+
 
             Random rand = new Random();
 
-
-            int nr_digits;
-            string nr_1 = "", nr_2 = "";
-
-            nr_digits = rand.Next(3, max_noDigits);
-            
-            //first digit shouldn't be 0
-            nr_1 += (char)('0' + rand.Next(1, 9));
-
-            //adding rest of the digits
-            for (int i = 1; i < nr_digits; i++)
-                nr_1 += (char)('0' + rand.Next(0, 9));
-
-
-            //first digit shouldn't be 0
-            nr_2 += (char)('0' + rand.Next(1, 9));
-
-            //adding rest of the digits
-            for (int i = 1; i < nr_digits; i++)
-                nr_2 += (char)('0' + rand.Next(0, 9));
-
-            if(nr_1.Length<nr_2.Length)
+            if(max_Numbers<2 || max_Digits<3)
             {
-                string aux = nr_1;
-                nr_1 = nr_2;
-                nr_2 = aux;
+                MessageBox.Show("Error. Max.no of digits should be at least 3, Max.no of numbers should be at least 2.");
+
+                if (max_Numbers < 2) { max_Numbers = 2; }
+                if (max_Digits < 3) { max_Digits = 3; }
             }
-            richTextBox2.Text = nr_1 + " + " + nr_2;
+
+            //There should be at least 2 numbers to add up
+            nr_numbers = rand.Next(2, max_Numbers);
+
+            for (int i=0; i<nr_numbers; i++)
+            {
+                //How many digits  new number has
+                nr_digits = rand.Next(3, max_Digits);
+
+                string newNumber = "";
+
+                for (int j = 1; j < nr_digits; j++)
+                    newNumber += (char)('0' + rand.Next(0, 9));
+
+                generated_numbers.Add(newNumber);           
+            }
+
+            generated_numbers = generated_numbers.OrderByDescending(p => p.Length).ToList();
+
+            string output_expression = "";
+            
+            for(int i=0;i<generated_numbers.Count;i++)
+            {
+                output_expression += generated_numbers[i] + " ";
+
+                if (i < nr_numbers - 1)
+                {
+                    output_expression += "+ ";
+                }
+            }
+
+            richTextBox2.Text = output_expression;
 
             button2_Click(null, null);
+
+            string aux = richTextBox1.Text;
+            string oldNrValue = richTextBox2.Text;
+            richTextBox1.Text = richTextBox2.Text;
+            richTextBox2.Text = aux;
+
+            button1_Click(null, null);
+
+            richTextBox2.Text += Environment.NewLine + Environment.NewLine + oldNrValue;
+
+
         }
     }
 
