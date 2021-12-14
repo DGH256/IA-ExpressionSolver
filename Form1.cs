@@ -175,7 +175,7 @@ namespace Sandbox_Winforms
 
         string generate_ruleAdditionOperations()
         {
-            string result = "", trailing_expression="0", trailing_expression_format = null;
+            string result = "", expression2="0", trailing_expression_token = null;
 
             List<string> l = new List<string>();
             List<string> l_prev = new List<string>();
@@ -205,8 +205,6 @@ namespace Sandbox_Winforms
 
                 string expression1 = string.Format("(+ {0} {1})", l[0], l[1]);
 
-                string expression2 = "";
-
                 if (words.Count>3)
                 {
                     for(int j=2;j<words.Count-1;j++)
@@ -215,27 +213,23 @@ namespace Sandbox_Winforms
                     }
                 }
 
-                if (trailing_expression_format != null)
+                if (trailing_expression_token != null)
                 {
-                    if (trailing_expression == null)
+                    if (expression2 == null)
                     {
-                        trailing_expression = trailing_expression_format;
+                        expression2 = trailing_expression_token;
                     }
                     else
                     {
-                        trailing_expression = string.Format("(+ {1} (/ {0} 10) )", trailing_expression, trailing_expression_format);
+                        expression2 = string.Format("(+ {1} (/ {0} 10) )", expression2, trailing_expression_token);
                     }
                 }
 
-                if (trailing_expression != null)
-                {
-                    expression2 = trailing_expression;
-                }
-
-                trailing_expression_format = expression1;
+                trailing_expression_token = expression1;
 
                 string l1 = l[words.Count - 1];
 
+                //First digit should be < 10
                 if (i == wordMaxLength - 1)
                 {
                     result += string.Format("(combination (letter {0}) (number {1}&:(<  (+ {2} (/ {3} 10))  10)))", l1.Substring(1).ToUpper(), l1, expression1, expression2) + Environment.NewLine;
