@@ -1,3 +1,3 @@
 # IA-ExpressionSolver
 
-![Screenshot_5987](https://user-images.githubusercontent.com/91731551/145994255-1ff00de6-4b2f-4156-a4f3-cdb201943e2a.png)
+![Screenshot_5992](https://user-images.githubusercontent.com/91731551/146039082-34456194-65d3-401d-a704-8d1a96b71751.png)
