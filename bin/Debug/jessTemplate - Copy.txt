@@ -1,0 +1,74 @@
+
+;;;
+;;;         NUMBER 
+;;;        +NUMBER
+;;;          ------
+;;;        =PUZZLE
+;;;
+
+(defrule startup
+  =>
+  (printout t "The problem is" crlf)
+  (printout t "  NUMBER" crlf)
+  (printout t " +NUMBER" crlf)
+  (printout t "  -------" crlf)
+  (printout t " =PUZZLE" crlf)
+  (assert (number 0)(number 1)(number 2)(number 3)(number 4)
+          (number 5)(number 6)(number 7)(number 8)(number 9)
+          (letter N)(letter U)(letter M)(letter B)
+          (letter E)(letter R)(letter P)(letter Z)(letter L)))
+
+(deftemplate combination (slot letter (type SYMBOL)) 
+    (slot number (type INTEGER)))
+(defrule generate-combinations
+  (number ?x)
+  (letter ?a)
+  =>
+  (assert (combination (letter ?a) (number ?x))))
+
+
+(defrule find-solution
+	(combination (letter N) (number ?n))
+    (combination (letter U) (number ?u&~?n)) 
+    (combination (letter M) (number ?m&~?n&~?u))  
+    (combination (letter B) (number ?b&~?m&~?n&~?u))  
+    (combination (letter E) (number ?e&~?b&~?m&~?n&~?u))  
+    (combination (letter R) (number ?r&~?e&~?b&~?m&~?n&~?u))  
+    (combination (letter P) (number ?p&~?r&~?e&~?b&~?m&~?n&~?u))  
+    (combination (letter Z) (number ?z&~?p&~?r&~?e&~?b&~?m&~?n&~?u))  
+ 	(combination (letter L) (number ?l&~?z&~?p&~?r&~?e&~?b&~?m&~?n&~?u))  
+    (combination (letter E) (number ?e&:(= (mod (+ ?r ?r) 10) ?e))) 
+    (combination (letter L) (number ?l&:(= (mod (+ (+ ?e ?e) (/ (+ ?r ?r) 10)) 10) ?l)))
+    (combination (letter Z) (number ?z&:(= (mod (+ (+ ?b ?b) (/ (+ ?e ?e) 10)) 10) ?z))) 
+    (combination (letter Z) (number ?z&:(= (mod (+ (+ ?m ?m) (/ (+ ?b ?b) 10)) 10) ?z))) 
+    (combination (letter Z) (number ?u&:(= (mod (+ (+ ?u ?u) (/ (+ ?m ?m) 10)) 10) ?u))) 
+    (combination (letter P) (number ?p&:(= (mod (+ (+ ?n ?n) (/ (+ ?u ?u) 10)) 10) ?p))) 
+    (combination (letter N) (number ?n&:(< (+ (+ ?n ?n) (/ (+ ?u ?u) 10)) 10) ))
+  =>
+  (printout t "A solution is:" crlf)
+  (printout t "  N = " ?n )
+  (printout t "  U = " ?u )
+  (printout t "  M = " ?m )
+  (printout t "  B = " ?b )
+  (printout t "  E = " ?e )
+  (printout t "  R = " ?r )
+  (printout t "  P = " ?p )
+  (printout t "  Z = " ?z )
+  (printout t "  L = " ?l )
+ 
+  (printout t crlf)
+  (printout t "   " ?n ?u ?m ?b ?e ?r crlf)
+  (printout t "  +" ?n ?u ?m ?b ?e ?r crlf)
+  (printout t "   " "------" crlf)
+  (printout t " = " ?p ?u ?z ?z ?l ?e crlf) 
+
+  (printout t crlf)
+  
+)    
+
+
+
+(reset)
+(run)
+
+

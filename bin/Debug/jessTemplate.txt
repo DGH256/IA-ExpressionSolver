@@ -1,0 +1,35 @@
+{comment_problemInput}
+(defrule startup
+  =>
+{startup_printOut}
+  (assert (number 0)(number 1)(number 2)(number 3)(number 4)
+          (number 5)(number 6)(number 7)(number 8)(number 9)
+          {startup_letters}))
+
+(deftemplate combination (slot letter (type SYMBOL)) 
+    (slot number (type INTEGER)))
+(defrule generate-combinations
+  (number ?x)
+  (letter ?a)
+  =>
+  (assert (combination (letter ?a) (number ?x))))
+
+
+(defrule find-solution
+{rule_distinctLetters}
+{rule_additionOperations}
+ =>
+
+(printout t crlf)
+(printout t "A solution is:" crlf)
+{printout_solution1}
+(printout t crlf)
+{printout_solution2}
+(printout t crlf)
+  
+)    
+
+(reset)
+(run)
+
+

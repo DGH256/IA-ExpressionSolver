@@ -1,0 +1,18 @@
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\bin\Debug\Sandbox Winforms.exe.config
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\bin\Debug\Sandbox Winforms.exe
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\bin\Debug\Sandbox Winforms.pdb
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.csprojResolveAssemblyReference.cache
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Form1.resources
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Properties.Resources.resources
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.csproj.GenerateResource.Cache
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.exe
+c:\users\admin\documents\visual studio 2015\Projects\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.pdb
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\bin\Debug\Sandbox Winforms.exe.config
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.exe
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.pdb
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\bin\Debug\Sandbox Winforms.exe
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\bin\Debug\Sandbox Winforms.pdb
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.csprojResolveAssemblyReference.cache
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Form1.resources
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox_Winforms.Properties.Resources.resources
+C:\Visual Studio 2015\Projects 2\Sandbox Winforms\Sandbox Winforms\obj\Debug\Sandbox Winforms.csproj.GenerateResource.Cache
