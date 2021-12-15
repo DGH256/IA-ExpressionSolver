@@ -383,7 +383,7 @@ namespace Sandbox_Winforms
             {
                 char value = (char)('A' + rand.Next(0, maxValue));
 
-                //Making sure that we don't have 1 letter assigned to the 2 different digits
+                //Making sure that we don't have 1 letter assigned to 2 different digits
                 while(dictionary.Values.Contains(value))
                 {
                     value = (char)('A' + rand.Next(0, maxValue));
@@ -422,12 +422,6 @@ namespace Sandbox_Winforms
             }
 
             richTextBox1.Text = result;
-
-            //foreach(var item in dictionary)
-            //{
-            //    richTextBox2.Text += Environment.NewLine + (string.Format("(combination (letter {0}) (number ?{1}&:(= {2} ?{3})))", Char.ToUpper(item.Value), Char.ToLower(item.Value), item.Key, Char.ToLower(item.Value)));
-
-            //}
 
         }
 
