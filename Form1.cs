@@ -21,7 +21,7 @@ namespace Sandbox_Winforms
 
         private string jessTemplatePath = Directory.GetCurrentDirectory() + "\\jessTemplate.txt";
 
-        int wordMaxLength = 0;
+        int maxWordLength = 0;
 
         bool trailingExpressions = false;
 
@@ -35,21 +35,32 @@ namespace Sandbox_Winforms
 
         }
 
+        private bool isNumber(string str)
+        {
+            long n;
+
+            return long.TryParse(str, out n);
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            //Saving the words && the solution
-
-            wordMaxLength = 0; words = new List<string>(); words_reversed = new List<string>(); letters = new HashSet<char>();
+            maxWordLength = 0; words = new List<string>(); words_reversed = new List<string>(); letters = new HashSet<char>();
                        
             char[] separators = new char[] { '+', '=' };
 
-            var tokens = richTextBox2.Text.Split(separators, StringSplitOptions.RemoveEmptyEntries);
+            var inputString = richTextBox2.Text;
 
-            for(int i=0;i<tokens.Length;i++)
+            //Everything after ; is ignored. Example input string: "aa+bb=cc ;11+22=33", or "aa+bb=cc"
+            inputString = inputString.Split(';').FirstOrDefault();
+
+            var tokens = inputString.Split(separators, StringSplitOptions.RemoveEmptyEntries).ToList();
+
+            //Saving the words && the solution
+            for (int i=0;i<tokens.Count;i++)
             {
                 words.Add(tokens[i].Trim().ToUpper());
 
-                wordMaxLength = System.Math.Max(words[i].Length, wordMaxLength); //finding the maximum string length of all words
+                maxWordLength = System.Math.Max(words[i].Length, maxWordLength); //finding the maximum string length of all words
             }
 
             //Generating reverse words and adding them in new list
@@ -113,7 +124,7 @@ namespace Sandbox_Winforms
         {
             string result = "";
 
-            int bufferLength = wordMaxLength + 2;
+            int bufferLength = maxWordLength + 2;
 
             for(int i=0;i<words.Count;i++)
             {
@@ -132,7 +143,7 @@ namespace Sandbox_Winforms
 
                 if(i==words.Count-1)
                 {
-                    result += string.Format("(printout t \"{0}\" \"{1}\" crlf)", decorator_emptyString(bufferLength - wordMaxLength-1), decorator_dashedLine(wordMaxLength+1)) + Environment.NewLine;
+                    result += string.Format("(printout t \"{0}\" \"{1}\" crlf)", decorator_emptyString(bufferLength - maxWordLength-1), decorator_dashedLine(maxWordLength+1)) + Environment.NewLine;
                     decorator_sign = "=";
                 }
 
@@ -151,7 +162,7 @@ namespace Sandbox_Winforms
         }
         string generate_commentProblemInput()
         {
-            int bufferLength = wordMaxLength + 7;
+            int bufferLength = maxWordLength + 7;
 
             string comment_problemInput = Environment.NewLine + bufferedString("", bufferLength, true) + Environment.NewLine;
 
@@ -164,7 +175,7 @@ namespace Sandbox_Winforms
                 comment_problemInput += bufferedString(decorator + words[i], bufferLength, true) + Environment.NewLine;
             }
 
-            comment_problemInput += bufferedString(decorator_dashedLine(wordMaxLength), bufferLength, true) + Environment.NewLine;
+            comment_problemInput += bufferedString(decorator_dashedLine(maxWordLength), bufferLength, true) + Environment.NewLine;
 
             comment_problemInput += bufferedString("="+words[words.Count - 1], bufferLength, true) + Environment.NewLine;
 
@@ -185,7 +196,7 @@ namespace Sandbox_Winforms
                 l.Add("0"); l_prev.Add("0");
             }
 
-            for (int i = 0; i < wordMaxLength; i++)
+            for (int i = 0; i < maxWordLength; i++)
             {
                 for (int j = 0; j < words_reversed.Count; j++)
                 {
@@ -230,7 +241,7 @@ namespace Sandbox_Winforms
                 string l1 = l[words.Count - 1];
 
                 //First digit should be < 10
-                if (i == wordMaxLength - 1)
+                if (i == maxWordLength - 1)
                 {
                     result += string.Format("(combination (letter {0}) (number {1}&:(<  (+ {2} (/ {3} 10))  10)))", l1.Substring(1).ToUpper(), l1, expression1, expression2) + Environment.NewLine;
                 }
@@ -280,7 +291,7 @@ namespace Sandbox_Winforms
 
         string generate_startupPrintout()
         {
-            int bufferLength = wordMaxLength + 3;
+            int bufferLength = maxWordLength + 3;
 
             string result = "";
 
@@ -295,7 +306,7 @@ namespace Sandbox_Winforms
                 result += string.Format("(printout t \"{0}\" crlf)", bufferedString(decorator + words[i], bufferLength)) + Environment.NewLine;
             }
 
-            result += string.Format("(printout t \"{0}\" crlf)", bufferedString(decorator_dashedLine(wordMaxLength), bufferLength)) + Environment.NewLine;
+            result += string.Format("(printout t \"{0}\" crlf)", bufferedString(decorator_dashedLine(maxWordLength), bufferLength)) + Environment.NewLine;
 
             result += string.Format("(printout t \"{0}\" crlf)", bufferedString("=" + words[words.Count - 1], bufferLength)) + Environment.NewLine;           
 
@@ -467,7 +478,7 @@ namespace Sandbox_Winforms
 
             button1_Click(null, null);
 
-            richTextBox2.Text += Environment.NewLine + Environment.NewLine + oldNrValue;
+            richTextBox2.Text += Environment.NewLine + Environment.NewLine + ";"+oldNrValue;
 
 
         }
