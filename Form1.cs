@@ -218,9 +218,13 @@ namespace Sandbox_Winforms
 
                 if (words.Count>3)
                 {
+   
                     for(int j=2;j<words.Count-1;j++)
                     {
-                        expression1 = string.Format("(+ {0} {1})", expression1, l[j]);                     
+                        if (l[j] != "0")
+                        {
+                            expression1 = string.Format("(+ {0} {1})", expression1, l[j]);
+                        }           
                     }
                 }
 
@@ -250,6 +254,8 @@ namespace Sandbox_Winforms
 
 
             }
+
+            result = result.Replace("(/ 0 10)", "0");
 
             return result;
         }
@@ -377,6 +383,12 @@ namespace Sandbox_Winforms
             {
                 char value = (char)('A' + rand.Next(0, maxValue));
 
+                //Making sure that we don't have 1 letter assigned to the 2 different digits
+                while(dictionary.Values.Contains(value))
+                {
+                    value = (char)('A' + rand.Next(0, maxValue));
+                }
+
                 dictionary.Add(i.ToString()[0], value);
             }
 
@@ -410,6 +422,12 @@ namespace Sandbox_Winforms
             }
 
             richTextBox1.Text = result;
+
+            //foreach(var item in dictionary)
+            //{
+            //    richTextBox2.Text += Environment.NewLine + (string.Format("(combination (letter {0}) (number ?{1}&:(= {2} ?{3})))", Char.ToUpper(item.Value), Char.ToLower(item.Value), item.Key, Char.ToLower(item.Value)));
+
+            //}
 
         }
 
@@ -479,7 +497,6 @@ namespace Sandbox_Winforms
             button1_Click(null, null);
 
             richTextBox2.Text += Environment.NewLine + Environment.NewLine + ";"+oldNrValue;
-
 
         }
     }
